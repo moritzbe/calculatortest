@@ -47,17 +47,57 @@ class SeriesMasterOfTheUniverse
 		give_rating
 		@movieratings.sort_by do |title, rating| rating
 		end
-		puts @movieratings.to_a.last[0]
+		@movieratings.to_a.last[0]
 	end
 
 	def give_author
 		@movieauthors
 	end
+
+	def give_specific_author(movietitle)
+		@author = Imdb::Search.new(movietitle).movies.first.writers.first 
+	
+	end
+
  
 end
 
 
-movie = SeriesMasterOfTheUniverse.new.give_best
+@movie = SeriesMasterOfTheUniverse.new
+@bestmovie = @movie.give_best
+puts @bestmovie
+
+
+@movie.give_specific_author("Matrix")
+puts @author
+
+binding.pry
+
+
+
+
+
+
+
+describe SeriesMasterOfTheUniverse do 
+	before do
+		@movie = SeriesMasterOfTheUniverse.new
+		@author = SeriesMasterOfTheUniverse.new
+	end
+
+	describe "#rating" do 
+		it "should give the best movie" do
+			expect(@movie.give_best).to eq("Breaking Bad")
+		end
+	end
+
+	describe "#author" do 
+		it "should give the correct author" do
+			expect(@author.give_specific_author("Matrix")).to eq("")
+		end
+	end
+
+end
 
 
 
@@ -68,10 +108,3 @@ movie = SeriesMasterOfTheUniverse.new.give_best
 
 
 
-
-
-
-
-
-# best_movie.give_rating(@list)
-# best_movie.give_best
