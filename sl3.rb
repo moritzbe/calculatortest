@@ -19,15 +19,16 @@ class SeriesMasterOfTheUniverse
 	end
 
 	def most_seasons_from
-		@list.sort_by do |title, seasons| seasons end
-		@list.to_a.last[0]
+		a = @list.sort_by do |title, seasons| seasons end
+		b = a.to_a
+		c = b.last[0]
 	end
 
 	def most_episodes_from(episodesfromdata)
 		@episodes = episodesfromdata
-		@episodes.sort_by do |title, episodes| episodes
-		end
-		@episodes.to_a.last[0]
+		a = @episodes.sort_by do |title, episodes| episodes end
+		b = a.to_a
+		c = b.last[0]
 	end
 end
 
@@ -37,9 +38,9 @@ end
 
 describe SeriesMasterOfTheUniverse do 
 	before do
-		movie = DataMovie.new
-		movie.seasons
-		episodesfromdata = movie.episodes
+		movie1 = DataMovie.new
+		movie1.seasons
+		@episodesfromdata = movie1.episodes
 		@movie = SeriesMasterOfTheUniverse.new
 	end
 
@@ -57,7 +58,7 @@ describe SeriesMasterOfTheUniverse do
 
 	describe "#series with the most episodes" do 
 		it "should give the series with the most episodes" do
-			expect(@movie.most_episodes_from(episodesfromdata)).to eq("Friends")
+			expect(@movie.most_episodes_from(@episodesfromdata)).to eq("Friends")
 		end
 	end
 

@@ -48,6 +48,6 @@ class DataMovie
 end
 		
 
-movie = DataMovie.new
-movie.seasons
-episodesfromdata = movie.episodes
+movie1 = DataMovie.new
+movie1.seasons
+movie1.episodes
